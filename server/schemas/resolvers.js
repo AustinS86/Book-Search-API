@@ -4,7 +4,7 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
-    me: async (parent, args, context) => {
+    me: async (parent, _args, context) => {
       // if user is authenticated
       if (context.user) {
         // return the user
@@ -32,7 +32,7 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError("IUser not found!");
+        throw new AuthenticationError("User not found!");
       }
 
       const correctPw = await user.isCorrectPassword(password);
@@ -45,7 +45,7 @@ const resolvers = {
       return { token, user };
     },
 
-    saveBook: async (parent, { bookData }, context) => {
+    saveBook: async (_parent, { bookData }, context) => {
       if (context.user) {
         const updateUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
@@ -59,7 +59,7 @@ const resolvers = {
       throw new AuthenticationError("Please log in!");
     },
 
-    removeBook: async (parent, { bookId }, context) => {
+    removeBook: async (_parent, { bookId }, context) => {
       if (context.user) {
         const updateUser = await User.findByIdAndUpdate(
           { _id: context.user._id },

@@ -68,7 +68,7 @@ const SearchBooks = () => {
 
     try {
       await saveBook({
-        varibles: { bookData: { ...bookToSave } },
+        variables: { bookData: { ...bookToSave } },
       });
       console.log(saveBookIds);
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
@@ -114,8 +114,8 @@ const SearchBooks = () => {
         <Row>
           {searchedBooks.map((book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border="dark">
+              <Col md="4" key={book.bookId}>
+                <Card border="dark">
                   {book.image ? (
                     <Card.Img
                       src={book.image}

@@ -5,6 +5,8 @@ const db = require("./config/connection");
 const { User } = require("./models");
 const { signToken } = require("./utils/auth");
 const path = require("path");
+const jwt = require("jsonwebtoken");
+const { JsonWebTokenError } = require("jsonwebtoken");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -40,9 +42,20 @@ const server = new ApolloServer({
       // return the context with the user information
       return { user, signToken };
     } catch (err) {
-      console.error(err);
+      if (err instanceof JsonWebTokenError) {
+        console.log("invalid token");
+      } else {
+        console.error(err);
+      }
       return {};
     }
+  },
+  formatError: (err) => {
+    console.error("Error details:", err);
+    console.error("Path:", err.path);
+    console.error("Message:", err.message);
+    console.error("Extensions:", err.extensions);
+    return err;
   },
 });
 

@@ -19,6 +19,7 @@
   "dependencies": {
     "apollo-server-express": "^2.15.0",
     "gql": "^1.1.2",
-    "if-env": "^1.0.4"
+    "if-env": "^1.0.4",
+    "jsonwebtoken": "^9.0.0"
   }
 }

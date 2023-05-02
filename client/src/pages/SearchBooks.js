@@ -136,7 +136,7 @@ const SearchBooks = () => {
                         onClick={() => handleSaveBook(book.bookId)}
                       >
                         {savedBookIds?.some(
-                          (savedBookId) => savedBookIds === book.bookId
+                          (savedBookIds) => savedBookIds === book.bookId
                         )
                           ? "This book has already been saved!"
                           : "Save this Book!"}

@@ -7,6 +7,7 @@ const { signToken } = require("./utils/auth");
 const path = require("path");
 const jwt = require("jsonwebtoken");
 const { JsonWebTokenError } = require("jsonwebtoken");
+const { JWT_SECRET } = require("./config");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -34,8 +35,10 @@ const server = new ApolloServer({
     try {
       // if the token exists, decode it and get the user's information
       let user = null;
-      if (token) {
-        const { data } = jwt.verify(token, process.env.JWT_SECRET || "secret");
+      if (token && token.startsWith("Bearer ")) {
+        const actualToken = token.slice(7);
+        console.log("Token to be verified:", actualToken);
+        const data = jwt.verify(actualToken, JWT_SECRET);
         user = await User.findById(data._id);
       }
 

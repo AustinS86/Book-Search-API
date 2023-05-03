@@ -22,7 +22,10 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const httpLink = createHttpLink({
-  uri: "process.env.NODE_ENV === 'production' ? 'https://secret-wave-06956.herokuapp.com/graphql' : 'http://localhost:3001/graphql'",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://secret-wave-06956.herokuapp.com/graphql"
+      : "http://localhost:3001/graphql",
 });
 
 const client = new ApolloClient({

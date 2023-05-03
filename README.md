@@ -54,7 +54,7 @@ Upon opening the application, you will encounter a search bar where you can ente
 
 ## Questions
 
-If you have any questions please contact us:
+If you have any questions please contact me:
 
 GitHub:
 
